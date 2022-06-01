@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 
@@ -5,13 +7,15 @@ import { ListItemComponent, Task, TaskName, Separator, buttonStyles } from './st
 
 import { editButton, deleteButton } from '../../constants';
 
-function ListItem() {
+function ListItem({ task }) {
+    const handleCheckboxChange = () => {};
+
     return (
         <div>
             <ListItemComponent>
                 <Task>
-                    <Checkbox />
-                    <TaskName>Task</TaskName>
+                    <Checkbox completed={task.completed} handleCheckboxChange={handleCheckboxChange} />
+                    <TaskName>{task.taskName}</TaskName>
                 </Task>
                 <div>
                     <Button buttonName={editButton} styles={buttonStyles} />
@@ -23,5 +27,13 @@ function ListItem() {
         </div>
     );
 }
+
+ListItem.propTypes = {
+    task: PropTypes.object,
+};
+
+ListItem.defaultProps = {
+    task: null,
+};
 
 export default ListItem;

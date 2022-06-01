@@ -1,4 +1,4 @@
-import ListItem from '../ListItem/ListItem';
+import List from '../List/List';
 
 import Heading from './styles';
 
@@ -9,9 +9,7 @@ function Main() {
         <main>
             <Heading>{tasks}</Heading>
             <hr />
-            <div>
-                <ListItem />
-            </div>
+            <List />
         </main>
     );
 }
