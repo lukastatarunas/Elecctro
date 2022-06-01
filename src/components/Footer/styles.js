@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const FooterComponent = styled.footer`
-    position: fixed;
-    bottom: 0;
     display: flex;
 `;
 

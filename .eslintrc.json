@@ -2,6 +2,7 @@
   "extends": ["airbnb", "prettier"],
   "rules": {
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/forbid-prop-types": "off"
   }
 }

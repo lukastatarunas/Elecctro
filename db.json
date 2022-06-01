@@ -1,0 +1,24 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "taskName": "Learn HTML5",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "taskName": "Learn CSS3",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "taskName": "Learn JavaScript",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "taskName": "Learn React",
+      "completed": false
+    }
+  ]
+}
