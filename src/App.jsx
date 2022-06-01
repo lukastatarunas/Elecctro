@@ -1,13 +1,15 @@
 import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer';
 
 import AppContainer from './styles';
-
-import { inputPlaceholder, buttonName } from './constants';
 
 function App() {
     return (
         <AppContainer>
-            <Header inputPlaceholder={inputPlaceholder} buttonName={buttonName} />
+            <Header />
+            <Main />
+            <Footer />
         </AppContainer>
     );
 }
