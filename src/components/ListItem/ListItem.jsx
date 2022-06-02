@@ -1,13 +1,37 @@
+import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Modal from 'react-modal';
 
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
+import Input from '../Input/Input';
 
-import { ListItemComponent, Task, TaskName, Separator, buttonStyles } from './styles';
+import { ListItemComponent, Task, TaskName, Separator, buttonStyles, customModalStyles } from './styles';
 
-import { editButton, deleteButton } from '../../constants';
+import { editButton, editTask, modalInputPlaceholder, deleteButton } from '../../constants';
 
-function ListItem({ task, handleCheckboxChange, handleDeleteTask }) {
+function ListItem({ task, handleCheckboxChange, handleDeleteTask, handleEditTask }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalInputValue, setModalInputValue] = useState(``);
+
+    const openModal = useCallback(() => {
+        setIsModalOpen(true);
+    }, []);
+
+    const closeModal = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
+
+    const handleModalInputChange = useCallback((event) => {
+        setModalInputValue(event.target.value);
+    }, []);
+
+    const saveTask = useCallback((id, completed, taskName) => {
+        handleEditTask(id, completed, taskName);
+        setModalInputValue(``);
+        closeModal();
+    }, []);
+
     return (
         <div>
             <ListItemComponent>
@@ -16,7 +40,15 @@ function ListItem({ task, handleCheckboxChange, handleDeleteTask }) {
                     <TaskName>{task.taskName}</TaskName>
                 </Task>
                 <div>
-                    <Button buttonName={editButton} styles={buttonStyles} />
+                    <Button buttonName={editButton} styles={buttonStyles} onClick={openModal} />
+                    <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={customModalStyles} ariaHideApp={false}>
+                        <Input
+                            inputPlaceholder={modalInputPlaceholder}
+                            inputValue={modalInputValue}
+                            handleInputChange={handleModalInputChange}
+                        />
+                        <Button buttonName={editTask} onClick={() => saveTask(task.id, task.completed, modalInputValue)} />
+                    </Modal>
                     <Separator>/</Separator>
                     <Button buttonName={deleteButton} styles={buttonStyles} onClick={() => handleDeleteTask(task.id)} />
                 </div>
@@ -30,6 +62,7 @@ ListItem.propTypes = {
     task: PropTypes.object,
     handleCheckboxChange: PropTypes.func.isRequired,
     handleDeleteTask: PropTypes.func.isRequired,
+    handleEditTask: PropTypes.func.isRequired,
 };
 
 ListItem.defaultProps = {

@@ -73,6 +73,20 @@ function App() {
         }
     }, []);
 
+    const editTask = useCallback(async (id, completed, taskName) => {
+        try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+                method: 'PUT',
+                headers: httpHeaders,
+                body: JSON.stringify({ id, taskName, completed }),
+            });
+            await response.json();
+            fetchData().catch(console.error);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     const handleCreateTask = () => {
         createTask();
     };
@@ -83,6 +97,10 @@ function App() {
 
     const handleDeleteTask = useCallback((id) => {
         deleteTask(id);
+    }, []);
+
+    const handleEditTask = useCallback((id, completed, taskName) => {
+        editTask(id, completed, taskName);
     }, []);
 
     const filterTasks = () => {
@@ -99,7 +117,7 @@ function App() {
         <TasksContext.Provider value={tasks}>
             <AppContainer>
                 <Header inputValue={inputValue} handleInputChange={handleInputChange} handleCreateTask={handleCreateTask} />
-                <Main handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} />
+                <Main handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask} />
                 <Footer filterTasks={filterTasks} />
             </AppContainer>
         </TasksContext.Provider>

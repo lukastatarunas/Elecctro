@@ -6,12 +6,12 @@ import Heading from './styles';
 
 import { tasks } from '../../constants';
 
-function Main({ handleCheckboxChange, handleDeleteTask }) {
+function Main({ handleCheckboxChange, handleDeleteTask, handleEditTask }) {
     return (
         <main>
             <Heading>{tasks}</Heading>
             <hr />
-            <List handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} />
+            <List handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask} />
         </main>
     );
 }
@@ -19,6 +19,7 @@ function Main({ handleCheckboxChange, handleDeleteTask }) {
 Main.propTypes = {
     handleCheckboxChange: PropTypes.func.isRequired,
     handleDeleteTask: PropTypes.func.isRequired,
+    handleEditTask: PropTypes.func.isRequired,
 };
 
 export default Main;

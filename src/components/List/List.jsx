@@ -5,13 +5,13 @@ import TasksContext from '../../context/Tasks';
 
 import ListItem from '../ListItem/ListItem';
 
-function List({ handleCheckboxChange, handleDeleteTask }) {
+function List({ handleCheckboxChange, handleDeleteTask, handleEditTask }) {
     const tasks = useContext(TasksContext);
 
     return (
         <div>
             {tasks.map((task) => (
-                <ListItem key={task.id} task={task} handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} />
+                <ListItem key={task.id} task={task} handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask}/>
             ))}
         </div>
     );
@@ -20,6 +20,7 @@ function List({ handleCheckboxChange, handleDeleteTask }) {
 List.propTypes = {
     handleCheckboxChange: PropTypes.func.isRequired,
     handleDeleteTask: PropTypes.func.isRequired,
+    handleEditTask: PropTypes.func.isRequired,
 };
 
 export default List;
