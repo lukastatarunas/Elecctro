@@ -7,8 +7,12 @@ function Checkbox({ completed, onChange }) {
 }
 
 Checkbox.propTypes = {
-    completed: PropTypes.bool.isRequired,
+    completed: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
+};
+
+Checkbox.defaultProps = {
+    completed: null,
 };
 
 export default Checkbox;
