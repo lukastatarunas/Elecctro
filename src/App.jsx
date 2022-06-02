@@ -88,6 +88,7 @@ function App() {
     const filterTasks = () => {
         if (hideCompleted) {
             fetchData().catch(console.error);
+            setHideCompleted(!hideCompleted);
         } else {
             setTasks(tasks.filter((task) => !task.completed));
             setHideCompleted(!hideCompleted);
