@@ -113,11 +113,21 @@ function App() {
         }
     };
 
+    const sortTasks = () => {
+        const tasksCopy = [...tasks];
+        setTasks(tasksCopy.sort((a, b) => a.taskName.localeCompare(b.taskName)));
+    };
+
     return (
         <TasksContext.Provider value={tasks}>
             <AppContainer>
                 <Header inputValue={inputValue} handleInputChange={handleInputChange} handleCreateTask={handleCreateTask} />
-                <Main handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask} />
+                <Main
+                    handleCheckboxChange={handleCheckboxChange}
+                    handleDeleteTask={handleDeleteTask}
+                    handleEditTask={handleEditTask}
+                    sortTasks={sortTasks}
+                />
                 <Footer filterTasks={filterTasks} />
             </AppContainer>
         </TasksContext.Provider>
