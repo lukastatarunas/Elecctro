@@ -7,14 +7,17 @@ import { ListItemComponent, Task, TaskName, Separator, buttonStyles } from './st
 
 import { editButton, deleteButton } from '../../constants';
 
-function ListItem({ task }) {
-    const handleCheckboxChange = () => {};
-
+function ListItem({ task, handleCheckboxChange }) {
     return (
         <div>
             <ListItemComponent>
                 <Task>
-                    <Checkbox completed={task.completed} handleCheckboxChange={handleCheckboxChange} />
+                    <Checkbox
+                        id={task.id}
+                        completed={task.completed}
+                        taskName={task.taskName}
+                        handleCheckboxChange={handleCheckboxChange}
+                    />
                     <TaskName>{task.taskName}</TaskName>
                 </Task>
                 <div>
@@ -30,6 +33,7 @@ function ListItem({ task }) {
 
 ListItem.propTypes = {
     task: PropTypes.object,
+    handleCheckboxChange: PropTypes.func.isRequired,
 };
 
 ListItem.defaultProps = {

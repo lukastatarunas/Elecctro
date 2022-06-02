@@ -24,9 +24,9 @@ function App() {
         fetchData().catch(console.error);
     }, [fetchData]);
 
-    const handleInputChange = (event) => {
+    const handleInputChange = useCallback((event) => {
         setInputValue(event.target.value);
-    };
+    }, []);
 
     const createTask = async () => {
         try {
@@ -39,6 +39,23 @@ function App() {
             });
             await response.json();
             fetchData().catch(console.error);
+            setInputValue(``);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const toggleTask = async (id, completed, taskName) => {
+        try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, taskName, completed: !completed }),
+            });
+            await response.json();
+            fetchData().catch(console.error);
         } catch (error) {
             console.log(error);
         }
@@ -48,11 +65,15 @@ function App() {
         createTask();
     };
 
+    const handleCheckboxChange = (id, completed, taskName) => {
+        toggleTask(id, completed, taskName);
+    };
+
     return (
         <TasksContext.Provider value={tasks}>
             <AppContainer>
                 <Header inputValue={inputValue} handleInputChange={handleInputChange} handleCreateTask={handleCreateTask} />
-                <Main />
+                <Main handleCheckboxChange={handleCheckboxChange} />
                 <Footer />
             </AppContainer>
         </TasksContext.Provider>
