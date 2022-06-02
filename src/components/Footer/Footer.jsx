@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import Checkbox from '../Checkbox/Checkbox';
@@ -19,4 +20,4 @@ Footer.propTypes = {
     filterTasks: PropTypes.func.isRequired,
 };
 
-export default Footer;
+export default memo(Footer);

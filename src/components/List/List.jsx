@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import TasksContext from '../../context/Tasks';
@@ -29,4 +29,4 @@ List.propTypes = {
     handleEditTask: PropTypes.func.isRequired,
 };
 
-export default List;
+export default memo(List);

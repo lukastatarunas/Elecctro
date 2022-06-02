@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import InputComponent from './styles';
@@ -12,4 +13,4 @@ Input.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
 };
 
-export default Input;
+export default memo(Input);

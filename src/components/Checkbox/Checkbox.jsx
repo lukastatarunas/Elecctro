@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import CheckboxComponent from './styles';
@@ -15,4 +16,4 @@ Checkbox.defaultProps = {
     completed: null,
 };
 
-export default Checkbox;
+export default memo(Checkbox);

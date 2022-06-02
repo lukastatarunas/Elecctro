@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
@@ -69,4 +69,4 @@ ListItem.defaultProps = {
     task: null,
 };
 
-export default ListItem;
+export default memo(ListItem);

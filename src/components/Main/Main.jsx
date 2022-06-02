@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import List from '../List/List';
@@ -23,4 +24,4 @@ Main.propTypes = {
     sortTasks: PropTypes.func.isRequired,
 };
 
-export default Main;
+export default memo(Main);

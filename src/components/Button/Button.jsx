@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import ButtonComponent from './styles';
@@ -20,4 +21,4 @@ Button.defaultProps = {
     styles: null,
 };
 
-export default Button;
+export default memo(Button);
