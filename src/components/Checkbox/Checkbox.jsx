@@ -2,15 +2,13 @@ import PropTypes from 'prop-types';
 
 import CheckboxComponent from './styles';
 
-function Checkbox({ id, completed, taskName, handleCheckboxChange }) {
-    return <CheckboxComponent type='checkbox' checked={completed} onChange={() => handleCheckboxChange(id, completed, taskName)} />;
+function Checkbox({ completed, onChange }) {
+    return <CheckboxComponent type='checkbox' checked={completed} onChange={onChange} />;
 }
 
 Checkbox.propTypes = {
-    id: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
-    taskName: PropTypes.string.isRequired,
-    handleCheckboxChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default Checkbox;

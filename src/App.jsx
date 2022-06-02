@@ -15,6 +15,7 @@ const apiUrl = `http://localhost:8000/tasks`;
 function App() {
     const [tasks, setTasks] = useState([]);
     const [inputValue, setInputValue] = useState(``);
+    const [hideCompleted, setHideCompleted] = useState(false);
 
     const fetchData = useCallback(async () => {
         const data = await fetch(apiUrl);
@@ -84,12 +85,21 @@ function App() {
         deleteTask(id);
     }, []);
 
+    const filterTasks = () => {
+        if (hideCompleted) {
+            fetchData().catch(console.error);
+        } else {
+            setTasks(tasks.filter((task) => !task.completed));
+            setHideCompleted(!hideCompleted);
+        }
+    };
+
     return (
         <TasksContext.Provider value={tasks}>
             <AppContainer>
                 <Header inputValue={inputValue} handleInputChange={handleInputChange} handleCreateTask={handleCreateTask} />
                 <Main handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} />
-                <Footer />
+                <Footer filterTasks={filterTasks} />
             </AppContainer>
         </TasksContext.Provider>
     );

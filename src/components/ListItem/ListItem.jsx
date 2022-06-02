@@ -12,12 +12,7 @@ function ListItem({ task, handleCheckboxChange, handleDeleteTask }) {
         <div>
             <ListItemComponent>
                 <Task>
-                    <Checkbox
-                        id={task.id}
-                        completed={task.completed}
-                        taskName={task.taskName}
-                        handleCheckboxChange={handleCheckboxChange}
-                    />
+                    <Checkbox completed={task.completed} onChange={() => handleCheckboxChange(task.id, task.completed, task.taskName)} />
                     <TaskName>{task.taskName}</TaskName>
                 </Task>
                 <div>
