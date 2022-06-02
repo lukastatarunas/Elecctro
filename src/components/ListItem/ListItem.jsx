@@ -26,8 +26,8 @@ function ListItem({ task, handleCheckboxChange, handleDeleteTask, handleEditTask
         setModalInputValue(event.target.value);
     }, []);
 
-    const saveTask = useCallback((id, completed, taskName) => {
-        handleEditTask(id, completed, taskName);
+    const saveTask = useCallback((uuid, completed, taskName) => {
+        handleEditTask(uuid, completed, taskName);
         setModalInputValue(``);
         closeModal();
     }, []);
@@ -36,7 +36,7 @@ function ListItem({ task, handleCheckboxChange, handleDeleteTask, handleEditTask
         <div>
             <ListItemComponent>
                 <Task>
-                    <Checkbox completed={task.completed} onChange={() => handleCheckboxChange(task.id, task.completed, task.taskName)} />
+                    <Checkbox completed={task.completed} onChange={() => handleCheckboxChange(task.uuid, task.completed, task.taskName)} />
                     <TaskName>{task.taskName}</TaskName>
                 </Task>
                 <div>
@@ -47,10 +47,10 @@ function ListItem({ task, handleCheckboxChange, handleDeleteTask, handleEditTask
                             inputValue={modalInputValue}
                             handleInputChange={handleModalInputChange}
                         />
-                        <Button buttonName={editTask} onClick={() => saveTask(task.id, task.completed, modalInputValue)} />
+                        <Button buttonName={editTask} onClick={() => saveTask(task.uuid, task.completed, modalInputValue)} />
                     </Modal>
                     <Separator>/</Separator>
-                    <Button buttonName={deleteButton} styles={buttonStyles} onClick={() => handleDeleteTask(task.id)} />
+                    <Button buttonName={deleteButton} styles={buttonStyles} onClick={() => handleDeleteTask(task.uuid)} />
                 </div>
             </ListItemComponent>
             <hr />

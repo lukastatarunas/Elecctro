@@ -11,7 +11,13 @@ function List({ handleCheckboxChange, handleDeleteTask, handleEditTask }) {
     return (
         <div>
             {tasks.map((task) => (
-                <ListItem key={task.id} task={task} handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask}/>
+                <ListItem
+                    key={task.uuid}
+                    task={task}
+                    handleCheckboxChange={handleCheckboxChange}
+                    handleDeleteTask={handleDeleteTask}
+                    handleEditTask={handleEditTask}
+                />
             ))}
         </div>
     );

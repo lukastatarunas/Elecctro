@@ -48,12 +48,12 @@ function App() {
         }
     };
 
-    const toggleTask = useCallback(async (id, completed, taskName) => {
+    const toggleTask = useCallback(async (uuid, completed, taskName) => {
         try {
-            const response = await fetch(`${apiUrl}/${id}`, {
+            const response = await fetch(`${apiUrl}/${uuid}`, {
                 method: 'PUT',
                 headers: httpHeaders,
-                body: JSON.stringify({ id, taskName, completed: !completed }),
+                body: JSON.stringify({ uuid, taskName, completed: !completed }),
             });
             await response.json();
             fetchData().catch(console.error);
@@ -62,9 +62,9 @@ function App() {
         }
     }, []);
 
-    const deleteTask = useCallback(async (id) => {
+    const deleteTask = useCallback(async (uuid) => {
         try {
-            const response = await fetch(`${apiUrl}/${id}`, {
+            const response = await fetch(`${apiUrl}/${uuid}`, {
                 method: 'DELETE',
                 headers: httpHeaders,
             });
@@ -75,12 +75,12 @@ function App() {
         }
     }, []);
 
-    const editTask = useCallback(async (id, completed, taskName) => {
+    const editTask = useCallback(async (uuid, completed, taskName) => {
         try {
-            const response = await fetch(`${apiUrl}/${id}`, {
+            const response = await fetch(`${apiUrl}/${uuid}`, {
                 method: 'PUT',
                 headers: httpHeaders,
-                body: JSON.stringify({ id, taskName, completed }),
+                body: JSON.stringify({ uuid, taskName, completed }),
             });
             await response.json();
             fetchData().catch(console.error);
@@ -93,16 +93,16 @@ function App() {
         createTask();
     };
 
-    const handleCheckboxChange = useCallback((id, completed, taskName) => {
-        toggleTask(id, completed, taskName);
+    const handleCheckboxChange = useCallback((uuid, completed, taskName) => {
+        toggleTask(uuid, completed, taskName);
     }, []);
 
-    const handleDeleteTask = useCallback((id) => {
-        deleteTask(id);
+    const handleDeleteTask = useCallback((uuid) => {
+        deleteTask(uuid);
     }, []);
 
-    const handleEditTask = useCallback((id, completed, taskName) => {
-        editTask(id, completed, taskName);
+    const handleEditTask = useCallback((uuid, completed, taskName) => {
+        editTask(uuid, completed, taskName);
     }, []);
 
     const filterTasks = () => {
