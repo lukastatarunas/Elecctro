@@ -16,6 +16,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [inputValue, setInputValue] = useState(``);
     const [hideCompleted, setHideCompleted] = useState(false);
+    const [sorted, setSorted] = useState(false);
 
     const fetchData = useCallback(async () => {
         const data = await fetch(apiUrl);
@@ -115,7 +116,17 @@ function App() {
 
     const sortTasks = () => {
         const tasksCopy = [...tasks];
-        setTasks(tasksCopy.sort((a, b) => a.taskName.localeCompare(b.taskName)));
+        if (sorted) {
+            //
+            setTasks(tasksCopy.sort((a, b) => a.taskName.localeCompare(b.taskName)).reverse());
+            setSorted(!sorted);
+        } else if (!sorted) {
+            //
+            setTasks(tasksCopy.sort((a, b) => a.taskName.localeCompare(b.taskName)));
+            setSorted(!sorted);
+        } else {
+            //
+        }
     };
 
     return (
