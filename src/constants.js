@@ -4,3 +4,6 @@ export const createButton = `Create`;
 export const editButton = `Edit`;
 export const deleteButton = `Delete`;
 export const hideCompleted = `Hide completed`;
+export const httpHeaders = {
+    'Content-Type': 'application/json',
+};

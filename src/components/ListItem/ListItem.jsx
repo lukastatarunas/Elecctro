@@ -7,7 +7,7 @@ import { ListItemComponent, Task, TaskName, Separator, buttonStyles } from './st
 
 import { editButton, deleteButton } from '../../constants';
 
-function ListItem({ task, handleCheckboxChange }) {
+function ListItem({ task, handleCheckboxChange, handleDeleteTask }) {
     return (
         <div>
             <ListItemComponent>
@@ -23,7 +23,7 @@ function ListItem({ task, handleCheckboxChange }) {
                 <div>
                     <Button buttonName={editButton} styles={buttonStyles} />
                     <Separator>/</Separator>
-                    <Button buttonName={deleteButton} styles={buttonStyles} />
+                    <Button buttonName={deleteButton} styles={buttonStyles} onClick={() => handleDeleteTask(task.id)} />
                 </div>
             </ListItemComponent>
             <hr />
@@ -34,6 +34,7 @@ function ListItem({ task, handleCheckboxChange }) {
 ListItem.propTypes = {
     task: PropTypes.object,
     handleCheckboxChange: PropTypes.func.isRequired,
+    handleDeleteTask: PropTypes.func.isRequired,
 };
 
 ListItem.defaultProps = {

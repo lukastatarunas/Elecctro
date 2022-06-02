@@ -8,6 +8,8 @@ import Footer from './components/Footer/Footer';
 
 import AppContainer from './styles';
 
+import { httpHeaders } from './constants';
+
 const apiUrl = `http://localhost:8000/tasks`;
 
 function App() {
@@ -32,9 +34,7 @@ function App() {
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: httpHeaders,
                 body: JSON.stringify({ id: tasks.length + 1, taskName: inputValue, completed: false }),
             });
             await response.json();
@@ -45,13 +45,11 @@ function App() {
         }
     };
 
-    const toggleTask = async (id, completed, taskName) => {
+    const toggleTask = useCallback(async (id, completed, taskName) => {
         try {
             const response = await fetch(`${apiUrl}/${id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: httpHeaders,
                 body: JSON.stringify({ id, taskName, completed: !completed }),
             });
             await response.json();
@@ -59,21 +57,38 @@ function App() {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, []);
+
+    const deleteTask = useCallback(async (id) => {
+        try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+                method: 'DELETE',
+                headers: httpHeaders,
+            });
+            await response.json();
+            fetchData().catch(console.error);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     const handleCreateTask = () => {
         createTask();
     };
 
-    const handleCheckboxChange = (id, completed, taskName) => {
+    const handleCheckboxChange = useCallback((id, completed, taskName) => {
         toggleTask(id, completed, taskName);
-    };
+    }, []);
+
+    const handleDeleteTask = useCallback((id) => {
+        deleteTask(id);
+    }, []);
 
     return (
         <TasksContext.Provider value={tasks}>
             <AppContainer>
                 <Header inputValue={inputValue} handleInputChange={handleInputChange} handleCreateTask={handleCreateTask} />
-                <Main handleCheckboxChange={handleCheckboxChange} />
+                <Main handleCheckboxChange={handleCheckboxChange} handleDeleteTask={handleDeleteTask} />
                 <Footer />
             </AppContainer>
         </TasksContext.Provider>

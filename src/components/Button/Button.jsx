@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 
 import ButtonComponent from './styles';
 
-function Button({ buttonName, styles, handleCreateTask }) {
+function Button({ buttonName, styles, onClick }) {
     return (
-        <ButtonComponent type='button' style={styles} onClick={handleCreateTask}>
+        <ButtonComponent type='button' style={styles} onClick={onClick}>
             {buttonName}
         </ButtonComponent>
     );
@@ -13,7 +13,7 @@ function Button({ buttonName, styles, handleCreateTask }) {
 Button.propTypes = {
     buttonName: PropTypes.string.isRequired,
     styles: PropTypes.object,
-    handleCreateTask: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 Button.defaultProps = {

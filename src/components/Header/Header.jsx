@@ -11,7 +11,7 @@ function Header({ inputValue, handleInputChange, handleCreateTask }) {
     return (
         <HeaderComponent>
             <Input inputPlaceholder={inputPlaceholder} inputValue={inputValue} handleInputChange={handleInputChange} />
-            <Button buttonName={createButton} handleCreateTask={handleCreateTask} />
+            <Button buttonName={createButton} onClick={handleCreateTask} />
         </HeaderComponent>
     );
 }
